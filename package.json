@@ -1,0 +1,14 @@
+{
+  "name": "orgy",
+  "version": "0.0.1",
+  "description": "Organize your brain",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Anand Narayan Sivaprakasam",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^27.0.0"
+  }
+}
