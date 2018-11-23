@@ -1,0 +1,45 @@
+[
+  {
+    "scope": "https://www.googleapis.com:443",
+    "method": "post",
+    "path": "/oauth2/v4/token",
+    "body": "refresh_token=1%2FVxITiZClwQ76BdHQ8jl_9WZtkYjzvVoR14fM3yCne1Y&client_id=395148a85588-u14sldkjlvsbkip0go8cr0c28p2khrma.apps.googleusercontent.com&client_secret=Pxif_qiTMdrIA24NNUlfxC5C&grant_type=refresh_token",
+    "status": 200,
+    "response": {
+      "access_token": "ya29.Gls4BuWYXLUPIMWcxBP2YK31WUliRq_Ifm0q8LsB68vMzlRf9sW2dKRgpatC7jgNvIIt8Cjyy86-o3TN8OXAi4rNguPLLMbBzijlHZFwEnUJbT_5Sxvqt95Qopuy",
+      "expires_in": 3600,
+      "refresh_token": "1/VxITiZClwQ76BdHQ8jl_9WZtkYjzvVoR14fM3yCne1Y",
+      "scope": "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/calendar.readonly",
+      "token_type": "Bearer",
+      "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk2MWNmNjBiY2VkZDkwNjdjNGNmMWYyZGRmNGVkNjEyYjUzNmZiMWEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzOTUxNDg1ODU1ODgtdTE0c2xka2psdnNia2lwMGdvOGNyMGMyOHAya2hybWEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzOTUxNDg1ODU1ODgtdTE0c2xka2psdnNia2lwMGdvOGNyMGMyOHAya2hybWEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTUyMDY2MTAwNzAyNjk1NTIzMTgiLCJoZCI6ImNvZGVicmFobWEuY29tIiwiZW1haWwiOiJrYW1lc2hAY29kZWJyYWhtYS5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InRfN3hFZkNhbHhHTFBoSngzSUhzakEiLCJuYW1lIjoiS2FtZXNoIFdhcmFuIiwicGljdHVyZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tMHFnOTM0YTRBQjgvQUFBQUFBQUFBQUkvQUFBQUFBQUFBR1kvZU9TSnEtTlhEOVUvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6IkthbWVzaCIsImZhbWlseV9uYW1lIjoiV2FyYW4iLCJsb2NhbGUiOiJlbiIsImlhdCI6MTUzOTcxMzU1NSwiZXhwIjoxNTM5NzE3MTU1fQ.TR_Mz1ViZx7QLGjwyk8DmtUNui_a1dusYXxyjF8GSITycqQfgQJQicAVIOebezFwkQD_m22m6qDduhBsTtVqPrFurls6ihuH5jZW3Y1i2qWuuI3JZwXppOT2OxOfWfEZFI9WNRztw_JR4GgMZMiV1t-nbXDhONrBIAlY6_NgwL8soE74WMTn9qFX1VHdDgy0cHtHio_CAw_4SyS73m7Tio4HkMFVXHL6zH6GTqx5SlRqeDiHdA2bgVttjFFudd_7xWNzLvZlDQj6WPTXnas_5mqTpD111D-yCz7SjgJ7DcagTXUx28ax_j3hA_mhOs80PS9i0oqBcIh4CiaGpAXoAg"
+    },
+    "rawHeaders": [
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Vary",
+      "X-Origin",
+      "Vary",
+      "Referer",
+      "Date",
+      "Tue, 16 Oct 2018 18:12:35 GMT",
+      "Server",
+      "ESF",
+      "Cache-Control",
+      "private",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Alt-Svc",
+      "quic=\":443\"; ma=2592000; v=\"44,43,39,35\"",
+      "Accept-Ranges",
+      "none",
+      "Vary",
+      "Origin,Accept-Encoding",
+      "Connection",
+      "close"
+    ]
+  }
+]

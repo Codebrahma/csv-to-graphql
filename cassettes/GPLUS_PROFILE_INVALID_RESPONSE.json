@@ -1,0 +1,43 @@
+[
+  {
+    "scope": "https://www.googleapis.com:443",
+    "method": "get",
+    "path": "/plus/v1/people/me?fields=emails%2Cimage%2Cname%2Cnickname%2C%20organizations",
+    "body": "",
+    "status": 400,
+    "response": {
+      "error": "invalid_grant",
+      "error_description": "Bad Request"
+    },
+    "rawHeaders": [
+      "Expires",
+      "Tue, 16 Oct 2018 18:22:25 GMT",
+      "Date",
+      "Tue, 16 Oct 2018 18:22:25 GMT",
+      "Cache-Control",
+      "private, max-age=0, must-revalidate, no-transform",
+      "ETag",
+      "\"jb1Xzanox6i8Zyse4DcYD8sZqy0/j7IRK9-SFuYXzR2AfAVQ8cRrhRQ\"",
+      "Vary",
+      "Origin",
+      "Vary",
+      "X-Origin",
+      "Content-Type",
+      "application/json; charset=UTF-8",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "Content-Length",
+      "298",
+      "Server",
+      "GSE",
+      "Alt-Svc",
+      "quic=\":443\"; ma=2592000; v=\"44,43,39,35\"",
+      "Connection",
+      "close"
+    ]
+  }
+]

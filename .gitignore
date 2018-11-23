@@ -1,4 +1,8 @@
 credentials.json
 token.json
+config/config.json
+config/*.env
 node_modules/
-package-lock.json
+logs/*.log
+.nyc_output/
+coverage/
