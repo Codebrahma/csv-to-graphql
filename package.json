@@ -48,6 +48,7 @@
     "nock-vcr-recorder": "^0.1.5",
     "nodemon": "^1.18.4",
     "nyc": "^13.1.0",
+    "sequelize-cli": "^5.4.0",
     "sinon": "^7.0.0"
   }
 }

@@ -2,6 +2,7 @@ const { server, chai, sinonSandbox, expect, factory } = require('./../helper');
 const { User } = require('./../../models');
 const AuthService = require('./../../services/auth');
 const { cleanDatabase, stubCassette } = require('./../utils');
+const { assertInvalidToken } = require('./privateRouteAssert');
 const oauthCode = "4/egCFs62C-w5rdb2-DXO1IWp3wH0dePFxXI7WO5muqZjpqRn5ZMb7T_WAXP6hWZj6l7LXZqrVvj0otFzKFT4-ZLc";
 const invalidOauthCode = "4/egCFs62C-w5rdb2-DXO1IWp3wH0dedfxXI7WO5muqZjpqRn5ZMb7T_WAXP6hWZj6l7LXZqrVvj0otFzKFT4-ZLc";
 
@@ -118,30 +119,7 @@ describe('GET /am-i-authenticated', function() {
     });
   });
 
-  describe('when invalid jwt is present', function() {
-    it('should render unauthorized with status code 401', function(done) {
-      chai.
-        request(server).
-        get('/am-i-authenticated').
-        set({ jwt: 'invalid jwt' }).
-        end(function(_, res) {
-          expect(res.statusCode).to.be.equal(401);
-          expect(res.body).to.deep.equal({ error: 'Unauthorized' });
-          done();
-        });
-    });
-  });
+  describe('when invalid jwt is present', assertInvalidToken('/am-i-authenticated', true));
 
-  describe('when no jwt is present', function() {
-    it('should render unauthorized with status code 401', function(done) {
-      chai.
-        request(server).
-        get('/am-i-authenticated').
-        end(function(_, res) {
-          expect(res.statusCode).to.be.equal(401);
-          expect(res.body).to.deep.equal({ error: 'Unauthorized' });
-          done();
-        });
-    });
-  });
+  describe('when no jwt is present', assertInvalidToken('/am-i-authenticated'));
 });
