@@ -41,14 +41,14 @@ Install the below softwares
 6. Create databases for development and test environments
 
     ```shell
-    NODE_ENV=development sequelize db:create
-    NODE_ENV=test sequelize db:create
+    NODE_ENV=development node_modules/.bin/sequelize db:create
+    NODE_ENV=test node_modules/.bin/sequelize db:create
     ```
 7. Run schema migrations for development and test environments
 
     ```shell
-    NODE_ENV=development sequelize db:migrate
-    NODE_ENV=test sequelize db:migrate
+    NODE_ENV=development node_modules/.bin/sequelize db:migrate
+    NODE_ENV=test node_modules/.bin/sequelize db:migrate
     ```
 8. Verify the setup by running the following command. If all the tests pass, then you are good to go. If any tests fail, address your issue by mailing repo maintainers.
 
