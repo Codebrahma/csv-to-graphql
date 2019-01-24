@@ -6,9 +6,15 @@ const dynamicRoutes = [
     isPublic: true,
   },
   {
-    path: '/auth/google',
-    to: 'auth#index',
-    via: [ 'get' ],
+    path: '/register',
+    to: 'auth#register',
+    via: [ 'post' ],
+    isPublic: true,
+  },
+  {
+    path: '/sign-in',
+    to: 'auth#signIn',
+    via: [ 'post' ],
     isPublic: true,
   },
   {

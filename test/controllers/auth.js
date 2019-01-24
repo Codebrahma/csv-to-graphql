@@ -3,8 +3,6 @@ const { User } = require('./../../models');
 const AuthService = require('./../../services/auth');
 const { cleanDatabase, stubCassette } = require('./../utils');
 const { assertInvalidToken } = require('./privateRouteAssert');
-const oauthCode = "4/egCFs62C-w5rdb2-DXO1IWp3wH0dePFxXI7WO5muqZjpqRn5ZMb7T_WAXP6hWZj6l7LXZqrVvj0otFzKFT4-ZLc";
-const invalidOauthCode = "4/egCFs62C-w5rdb2-DXO1IWp3wH0dedfxXI7WO5muqZjpqRn5ZMb7T_WAXP6hWZj6l7LXZqrVvj0otFzKFT4-ZLc";
 
 describe('GET /auth/google', function() {
   before(function() {
