@@ -1,6 +1,5 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const { col, where } = sequelize;
   const User = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
@@ -13,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     defaultScope: { where: { isUser: true } },
     freezeTableName: true,
-    tableName: 'People',
   });
 
   User.associate = function(models) {
