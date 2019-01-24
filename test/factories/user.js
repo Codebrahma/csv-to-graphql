@@ -6,7 +6,5 @@ module.exports = () => (
     email: factory.chance('email'),
     name: factory.chance('name'),
     photo: factory.chance('url'),
-    clearbit: {},
-    isUser: true,
   })
 );

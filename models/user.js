@@ -7,10 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     photo: DataTypes.STRING,
-    isUser: DataTypes.BOOLEAN,
-  }, {
-    defaultScope: { where: { isUser: true } },
-    freezeTableName: true,
   });
 
   User.findBy = async function(options) {
