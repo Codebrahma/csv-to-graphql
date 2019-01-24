@@ -1,62 +1,31 @@
+const bcrypt = require('bcryptjs');
 const { User } = require('./../models');
 const AuthService = require('./../services/auth');
-const GoogleApis = require('./../utils/googleApis');
-const to = require('./../utils/to');
 const controllerLogger = require('./../logger').makeLogger('CONTROLLER');
 
 class AuthController {
-  static async index(req, res) {
-    let tokens, oAuth2Client;
+  static async register(req, res) {
+    const { email, name } = req.body;
+    const password = bcrypt.hashSync(req.body.password, 10);
+    const user = await User.findBy({ where: { email } });
 
-    try {
-      const tokenAndClient = await GoogleApis.getClientAndTokensFromOAuthCode(req.query.code);
-      tokens = tokenAndClient.tokens;
-      oAuth2Client = tokenAndClient.oAuth2Client;
-    } catch(error) {
-      controllerLogger.error(`Failed to fetch oauth token from Google: ${error.message}`);
-      return res.status(401).send({ error: 'Unauthorized' });
+    if (user) {
+      return res.status(400).send({ success: false, error: 'User is already registered' });
     }
 
-    try {
-      const { emails, image, name } = await GoogleApis.getGooglePlusProfile(oAuth2Client);
-      const email = emails[0].value;
-      const userDetail = {
-        email,
-        refresh_token: tokens.refresh_token,
-        access_token: tokens.access_token,
-        photo: image.url,
-        name: `${name.givenName} ${name.familyName}`,
-        expiry_date: tokens.expiry_date / 1000,
-      };
+    await User.create({ email, name, password });
+    res.status(201).send({ success: true, token: AuthService.generateJWT({ email }) });
+  }
 
-      controllerLogger.info(`Finding a user with email: ${email}`);
-      let user = await User.findBy({ email });
-      controllerLogger.info(`Found ${user ? 1 : 'no'} user with email ${email}`);
+  static async signIn(req, res) {
+    const user = await User.findBy({ email: req.body.email }) || {};
+    const isValidPassword = bcrypt.compareSync(req.body.password, user.password);
 
-      if (!user) {
-        let err;
-
-        controllerLogger.info(`Creating a user with email: ${email}`);
-        [ err, user ] = await to(User.upsertWithToken(userDetail));
-
-        if (err) {
-          controllerLogger.error(`Unable to create a user with email: ${err.message}`);
-          return res.status(500).send({ error: 'Something went wrong' });
-        }
-
-        controllerLogger.info(`Created a user record and tokens for: ${email}`);
-      } else {
-        user = await User.upsertWithToken(userDetail);
-      }
-
-      res.json({
-        jwt: AuthService.generateJWT({ email }),
-        ...userDetail
-      });
-    } catch(error) {
-      controllerLogger.error(`Error occurred while processing: ${error.message} ${error.stack}`);
-      return res.status(500).send({ error: 'Something went wrong' });
+    if (!isValidPassword) {
+      return res.status(401).send({ success: false, error: 'Invalid credentials' });
     }
+
+    res.status(201).send({ success: true, token: AuthService.generateJWT({ user.email }) });
   }
 
   static async isUserAuthenticated(_, res) {

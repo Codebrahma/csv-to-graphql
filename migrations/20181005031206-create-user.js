@@ -21,9 +21,6 @@ module.exports = {
       photo: {
         type: Sequelize.STRING
       },
-      clearbit: {
-        type: Sequelize.JSONB
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

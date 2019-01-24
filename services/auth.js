@@ -6,9 +6,9 @@ const { JWT_APP_SECRET } = process.env;
 const logger = makeLogger('AUTHENTICATION');
 
 class AuthService {
-  static generateJWT(email) {
+  static generateJWT(json) {
     const expiresIn = Math.floor( Date.now() / 1000 ) + JWT_TOKEN_EXPIRY_DURATION;
-    return jwt.sign(email, JWT_APP_SECRET, { expiresIn });
+    return jwt.sign(json, JWT_APP_SECRET, { expiresIn });
   }
 
   static async verifyJWT(token) {
