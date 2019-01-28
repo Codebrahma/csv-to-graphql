@@ -2,31 +2,26 @@ const bcrypt = require('bcryptjs');
 const { User } = require('./../models');
 const AuthService = require('./../services/auth');
 const controllerLogger = require('./../logger').makeLogger('CONTROLLER');
+const { successResponder, errorResponder } = require('./responders');
 
 class AuthController {
   static async register(req, res) {
-    const { email, name } = req.body;
+    const { email, name, username } = req.body;
     const password = bcrypt.hashSync(req.body.password, 10);
-    const user = await User.findBy({ email });
+    const errors = await User.validate(req.body);
 
-    if (user) {
-      return res.status(400).send({ success: false, error: 'User is already registered' });
-    }
-
-    await User.create({ email, name, password });
-    res.send({ success: true, token: AuthService.generateJWT({ email }) });
+    if (errors && errors.length) { return errorResponder(res, 400, errors); }
+    await User.create({ email, name, username, password });
+    return successResponder(res, { token: AuthService.generateJWT({ email }) });
   }
 
   static async signIn(req, res) {
     const { email, password } = req.body;
-    const user = await User.findBy({ email }) || {};
+    const user = await User.findBy({ email }) || { password: '' };
     const isValidPassword = bcrypt.compareSync(password, user.password);
 
-    if (!isValidPassword) {
-      return res.status(401).send({ success: false, error: 'Invalid credentials' });
-    }
-
-    res.send({ success: true, token: AuthService.generateJWT({ email }) });
+    if (!isValidPassword) { return errorResponder(res, 401, ['Invalid credentials']); }
+    return successResponder(res, { token: AuthService.generateJWT({ email }) });
   }
 
   static async isUserAuthenticated(_, res) {

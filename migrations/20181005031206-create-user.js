@@ -18,6 +18,10 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      username: {
+        type: 'citext',
+        unique: true
+      },
       photo: {
         type: Sequelize.STRING
       },
