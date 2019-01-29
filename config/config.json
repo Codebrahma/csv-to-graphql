@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "kamesh",
+    "database": "smart-hub-dev",
+    "host": "127.0.0.1",
+    "port": "5432",
+    "dialect": "postgres",
+    "operatorsaliases": false
+  },
+  "test": {
+    "username": "kamesh",
+    "database": "smart-hub-test",
+    "host": "127.0.0.1",
+    "port": "5432",
+    "dialect": "postgres",
+    "operatorsaliases": false
+  },
+  "staging": {
+    "username": "cbmnniosqgnlma",
+    "password": "4af185e8300f3b3a96b04668c9de5eac2478fda8eabf6fd9a0295b4adbb66b46",
+    "database": "d23edmv8lhvcb1",
+    "host": "ec2-23-23-184-76.compute-1.amazonaws.com",
+    "port": "5432",
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "operatorsaliases": false,
+    "dialectOptions": {
+      "ssl": true,
+      "sslfactory": "org.postgresql.ssl.NonValidatingFactory"
+    }
+  }
+}
