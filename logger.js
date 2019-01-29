@@ -13,6 +13,7 @@ const formatMessageWithTimestampAndLabel = printf(
 const logTransports = () => {
   switch(env) {
     case 'development':
+    case 'staging':
       return [ new transports.Console() ];
     case 'test':
       return [ new transports.File({ filename: `./logs/${process.env.NODE_ENV}.log` }) ];
