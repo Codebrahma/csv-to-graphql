@@ -1,2 +1,0 @@
-require('./root');
-require('./auth');
