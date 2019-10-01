@@ -12,6 +12,11 @@ const dynamicRoutes = [
     to: 'root#upload',
     via: ['post'],
     middlewares: [upload.single('csv')],
+  },
+  {
+    path: '/csv-to-graphql',
+    to: 'root#csvToGraphql',
+    via: ['get', 'post']
   }
 ];
 
