@@ -1,14 +1,23 @@
 const csv = require('csv-parser');
 const fs = require('fs');
 const _ = require('lodash');
-const { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLList } = require('graphql');
+const {
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLList,
+} = require('graphql');
 
 class CSVProcessor {
   static async parse(file) {
     return new Promise(resolve => {
       const results = [];
       fs.createReadStream(file)
-        .pipe(csv())
+        .pipe(
+          csv({
+            mapValues: ({ value }) => value ? unescape(new String(value).trim()) : null,
+          }),
+        )
         .on('data', data => results.push(data))
         .on('end', () => resolve(results));
     });
