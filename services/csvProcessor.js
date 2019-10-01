@@ -6,6 +6,7 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
+  GraphQLInt,
 } = require('graphql');
 
 class CSVProcessor {
@@ -15,7 +16,8 @@ class CSVProcessor {
       fs.createReadStream(file)
         .pipe(
           csv({
-            mapValues: ({ value }) => value ? unescape(new String(value).trim()) : null,
+            mapValues: ({ value }) =>
+              value ? unescape(new String(value).trim()) : null,
           }),
         )
         .on('data', data => results.push(data))
@@ -51,7 +53,11 @@ class CSVProcessor {
         fields: () => ({
           csv: {
             type: new GraphQLList(CSVProcessor.getType(headers)),
-            resolve: () => rows,
+            args: {
+              limit: { type: GraphQLInt },
+            },
+            resolve: (_, { limit }) =>
+              typeof limit === 'undefined' ? rows : rows.slice(0, limit),
           },
         }),
       }),
