@@ -3,6 +3,7 @@ require('./envConfigLoader')(process.env.NODE_ENV); // Load env based config
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
 const app = express();
 const http = require('http');
 const initializeSentry = require('./sentry');
@@ -16,6 +17,7 @@ const initializeApp = () => {
   const logger = require('./logger').makeLogger('APP');
   logger.info(`Loading env... ${process.env.NODE_ENV}`);
 
+  app.set('view engine', 'ejs');
   app.use(function(_req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt");

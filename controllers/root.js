@@ -1,6 +1,10 @@
 class RootController {
   static index(_req, res) {
-    return res.send('Hello World!');
+    return res.render('pages/home');
+  }
+
+  static upload(req, res) {
+    return res.render('pages/home');
   }
 }
 
