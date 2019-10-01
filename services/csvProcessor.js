@@ -56,9 +56,26 @@ class CSVProcessor {
             type: new GraphQLList(CSVProcessor.getType(headers)),
             args: {
               limit: { type: GraphQLInt },
+              ...headers.reduce(
+                (args, header) => ({
+                  ...args,
+                  [header]: { type: GraphQLString },
+                }),
+                {},
+              ),
             },
-            resolve: (_, { limit }) =>
-              typeof limit === 'undefined' ? rows : rows.slice(0, limit),
+            resolve: (_root, args) => {
+              const sortables = _.pick(args, headers);
+              const orderedRows = _.orderBy(
+                rows,
+                _.keys(sortables),
+                _.values(sortables),
+              );
+
+              return typeof limit === 'undefined'
+                ? orderedRows
+                : orderedRows.slice(0, limit);
+            },
           },
         }),
       }),
