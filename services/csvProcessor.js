@@ -16,6 +16,7 @@ class CSVProcessor {
       fs.createReadStream(file)
         .pipe(
           csv({
+            mapHeaders: ({ header }) => _.snakeCase(header.trim()),
             mapValues: ({ value }) =>
               value ? unescape(new String(value).trim()) : null,
           }),
@@ -31,16 +32,16 @@ class CSVProcessor {
       description: '...',
 
       fields: () =>
-        headers.reduce((fields, header) => {
-          const headerName = _.snakeCase(header.trim());
-          return {
+        headers.reduce(
+          (fields, header) => ({
             ...fields,
-            [headerName]: {
+            [header]: {
               type: GraphQLString,
               resolve: row => row[header],
             },
-          };
-        }, {}),
+          }),
+          {},
+        ),
     });
   }
 
