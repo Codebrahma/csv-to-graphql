@@ -1,6 +1,6 @@
 const { createLogger, format, transports } = require('winston');
 const expressWinston = require('express-winston');
-const { Papertrail } = require('winston-papertrail');
+//const { Papertrail } = require('winston-papertrail');
 const { combine, timestamp, label, printf } = format;
 const env = process.env.NODE_ENV || 'development';
 
@@ -18,17 +18,18 @@ const logTransports = () => {
     case 'test':
       return [ new transports.File({ filename: `./logs/${process.env.NODE_ENV}.log` }) ];
     default:
-      return [
-        new transports.Papertrail({
-          host: process.env.PAPERTRAIL_HOST,
-          port: process.env.PAPERTRAIL_PORT,
-          inlineMeta: true,
-          logFormat: (_, message) => {
-            const messagesToDisplay = message.match(/<<<<(.*)>>>>/)
-            return (messagesToDisplay && messagesToDisplay[1])
-          },
-        })
-      ]
+      return [ new transports.Console() ];
+      // return [
+      //   new transports.Papertrail({
+      //     host: process.env.PAPERTRAIL_HOST,
+      //     port: process.env.PAPERTRAIL_PORT,
+      //     inlineMeta: true,
+      //     logFormat: (_, message) => {
+      //       const messagesToDisplay = message.match(/<<<<(.*)>>>>/)
+      //       return (messagesToDisplay && messagesToDisplay[1])
+      //     },
+      //   })
+      // ]
   }
 }
 
