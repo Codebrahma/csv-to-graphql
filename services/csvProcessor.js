@@ -69,7 +69,10 @@ class CSVProcessor {
               const orderedRows = _.orderBy(
                 rows,
                 _.keys(sortables),
-                _.values(sortables),
+                _.chain(sortables)
+                  .values()
+                  .map(e => e.toLowerCase())
+                  .value(),
               );
 
               return typeof args.limit === 'undefined'
