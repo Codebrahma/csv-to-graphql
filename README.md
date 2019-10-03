@@ -11,7 +11,6 @@ Install the below softwares
 | :---------  | :--------  | :-------  | :-------- |
 | 1           | node       | >= 9.10.0 | [Node.js installation with nvm](https://blog.pm2.io/install-node-js-with-nvm/) |
 | 2           | npm        | >= 6.4.1  | [npm installation](https://www.npmjs.com/get-npm) |
-| 3           | postgresql | >= 10.1   | [PostgreSQL installation](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04) |
 
 ### Setup Instructions
 1. Clone the project
