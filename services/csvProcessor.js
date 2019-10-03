@@ -72,9 +72,9 @@ class CSVProcessor {
                 _.values(sortables),
               );
 
-              return typeof limit === 'undefined'
+              return typeof args.limit === 'undefined'
                 ? orderedRows
-                : orderedRows.slice(0, limit);
+                : orderedRows.slice(0, args.limit);
             },
           },
         }),
