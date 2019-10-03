@@ -18,7 +18,7 @@
         top: 50%;
         left: 50%;
         width: 400px;
-        height: 400px;
+        height: 450px;
         margin-top: -200px;
         margin-left: -200px;
         border-radius: 2px;
@@ -32,11 +32,17 @@
         -moz-osx-font-smoothing: grayscale;
       }
 
+      .logo {
+        height: 40px;
+        margin: 40px auto;
+        display: block;
+      }
+
       .center {
         position: absolute;
         width: 300px;
         height: 260px;
-        top: 70px;
+        top: 120px;
         left: 50px;
         background: #fff;
         box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
@@ -212,13 +218,16 @@
   <body>
     <form action="/upload" method="POST" enctype="multipart/form-data">
       <div class="frame">
+        <a href="https://codebrahma.com">
+          <img src="/images/cb_logo.png" class="logo" title="Codebrahma" />
+        </a>
         <div class="center">
           <div class="bar"></div>
           <div class="title">Drop CSV file to upload</div>
           <div class="dropzone">
             <div class="content">
               <img
-                src="https://100dayscss.com/codepen/upload.svg"
+                src="/images/upload.svg"
                 class="upload"
               />
               <span class="filename"></span>
@@ -226,7 +235,7 @@
             </div>
           </div>
           <img
-            src="https://100dayscss.com/codepen/syncing.svg"
+            src="/images/syncing.svg"
             class="syncing"
           />
           <input type="submit" class="upload-btn" value="Upload file" />

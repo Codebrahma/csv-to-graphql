@@ -26,6 +26,7 @@ const initializeApp = () => {
 
   app.use(bodyParser.json());
   app.use(cookieParser());
+  app.use(express.static(`${__dirname}/assets`));
   require('./routes')(app);
 
   const httpServer = http.createServer(app);
