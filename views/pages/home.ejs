@@ -281,6 +281,7 @@
         .on('drop', function(e) {
           droppedFiles = e.originalEvent.dataTransfer.files;
           fileName = droppedFiles[0]['name'];
+          $("[name=csv]").prop('files', droppedFiles);
           $('.filename').html(fileName);
           $('.dropzone .upload').hide();
         });
