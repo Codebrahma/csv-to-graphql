@@ -1,4 +1,4 @@
-# Node.js backend boilerplate
+# CSV to GraphQL
 ## Dev environment setup
 
 ### Setup Prerequisites
@@ -37,8 +37,6 @@ Install the below softwares
 ### To Contribute
 1. Create a new feature branch from `master` branch
 2. Make your contribution or changes
-3. Make sure no test is failing and you have code coverage more than 90% by running `npm run test`
-4. Push your branch to github.com
-5. Raise PR to `master` from your feature branch.
-6. Make sure `CircleCI` build passes at your feature branch. Your branch will only be merged after the review done by app maintainers.
-7. Assign `ready-for-review` label to your PR once you are done.
+3. Push your branch to github.com
+4. Raise PR to `master` from your feature branch.
+5. Assign `ready-for-review` label to your PR once you are done.
