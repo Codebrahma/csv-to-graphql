@@ -1,4 +1,301 @@
-<form action="/upload" method="POST" enctype="multipart/form-data">
-  <input type="file" name="csv" />
-  <input type="submit" />
-</form>
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+      .frame {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 400px;
+        margin-top: -200px;
+        margin-left: -200px;
+        border-radius: 2px;
+        box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+        background: #3a92af;
+        background: linear-gradient(to top right, #3a92af 0%, #5ca05a 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3A92AF', endColorstr='#5CA05A',GradientType=1 );
+        color: #fff;
+        font-family: 'Open Sans', Helvetica, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .center {
+        position: absolute;
+        width: 300px;
+        height: 260px;
+        top: 70px;
+        left: 50px;
+        background: #fff;
+        box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+      }
+
+      .title {
+        font-size: 16px;
+        color: #676767;
+        line-height: 50px;
+        height: 50px;
+        border-bottom: 1px solid #d8d8d8;
+        text-align: center;
+      }
+
+      .dropzone {
+        position: absolute;
+        z-index: 1;
+        box-sizing: border-box;
+        display: table;
+        table-layout: fixed;
+        width: 100px;
+        height: 80px;
+        top: 86px;
+        left: 100px;
+        border: 1px dashed #a4a4a4;
+        border-radius: 3px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .dropzone.is-dragover {
+        border-color: #666;
+        background: #eee;
+      }
+      .dropzone .content {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .dropzone .upload {
+        margin: 6px 0 0 2px;
+      }
+      .dropzone .filename {
+        display: block;
+        color: #676767;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      .dropzone .input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+      }
+
+      .upload-btn {
+        position: absolute;
+        width: 140px;
+        height: 40px;
+        left: 80px;
+        bottom: 24px;
+        background: #6ece3b;
+        border-radius: 3px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 14px;
+        box-shadow: 0 2px 0 0 #498c25;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      .upload-btn:hover {
+        box-shadow: 0 2px 0 0 #498c25, 0 2px 10px 0 #6ece3b;
+      }
+
+      .bar {
+        position: absolute;
+        z-index: 1;
+        width: 300px;
+        height: 3px;
+        top: 49px;
+        left: 0;
+        background: #6ece3b;
+        transition: all 3s ease-out;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+      }
+      .bar.active {
+        -webkit-transform: scaleX(1) translate3d(0, 0, 0);
+        transform: scaleX(1) translate3d(0, 0, 0);
+      }
+
+      .syncing {
+        position: absolute;
+        top: 109px;
+        left: 134px;
+        opacity: 0;
+      }
+      .syncing.active {
+        -webkit-animation: syncing 3.2s ease-in-out;
+        animation: syncing 3.2s ease-in-out;
+      }
+
+      .done {
+        position: absolute;
+        top: 112px;
+        left: 132px;
+        opacity: 0;
+      }
+      .done.active {
+        -webkit-animation: done 0.5s ease-in 3.2s;
+        animation: done 0.5s ease-in 3.2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+
+      @-webkit-keyframes syncing {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes syncing {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+          opacity: 0;
+        }
+      }
+      @-webkit-keyframes done {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes done {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <div class="frame">
+        <div class="center">
+          <div class="bar"></div>
+          <div class="title">Drop CSV file to upload</div>
+          <div class="dropzone">
+            <div class="content">
+              <img
+                src="https://100dayscss.com/codepen/upload.svg"
+                class="upload"
+              />
+              <span class="filename"></span>
+              <input type="file" class="input" name="csv" />
+            </div>
+          </div>
+          <img
+            src="https://100dayscss.com/codepen/syncing.svg"
+            class="syncing"
+          />
+          <input type="submit" class="upload-btn" value="Upload file" />
+        </div>
+      </div>
+    </form>
+  </body>
+
+  <script>
+    $(document).ready(function() {
+      var message = new URLSearchParams(window.location.search.slice(1)).get(
+        'notice',
+      );
+
+      if (message && $.notify) {
+        $.notify(message, "error");
+      }
+
+      var droppedFiles = false;
+      var fileName = '';
+      var $dropzone = $('.dropzone');
+      var $button = $('.upload-btn');
+      var uploading = false;
+      var $syncing = $('.syncing');
+      var $done = $('.done');
+      var $bar = $('.bar');
+      var timeOut;
+
+      $dropzone
+        .on(
+          'drag dragstart dragend dragover dragenter dragleave drop',
+          function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+        )
+        .on('dragover dragenter', function() {
+          $dropzone.addClass('is-dragover');
+        })
+        .on('dragleave dragend drop', function() {
+          $dropzone.removeClass('is-dragover');
+        })
+        .on('drop', function(e) {
+          droppedFiles = e.originalEvent.dataTransfer.files;
+          fileName = droppedFiles[0]['name'];
+          $('.filename').html(fileName);
+          $('.dropzone .upload').hide();
+        });
+
+      $button.bind('click', function() {
+        startUpload();
+      });
+
+      $('input:file').change(function() {
+        fileName = $(this)[0].files[0].name;
+        $('.filename').html(fileName);
+        $('.dropzone .upload').hide();
+      });
+
+      function startUpload() {
+        if (!uploading && fileName != '') {
+          uploading = true;
+          $button.html('Uploading...');
+          $dropzone.fadeOut();
+          $syncing.addClass('active');
+          $done.addClass('active');
+          $bar.addClass('active');
+        }
+      }
+    });
+  </script>
+</html>

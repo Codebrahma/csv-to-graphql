@@ -7,6 +7,9 @@ class RootController {
   }
 
   static async upload(req, res) {
+    if (!req.file || !req.file.path) {
+      return res.redirect('/?notice=CSV File is required to proceed')
+    }
     res.redirect(`/csv-to-graphql?path=${req.file.path}`);
   }
 
