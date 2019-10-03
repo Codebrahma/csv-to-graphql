@@ -2,6 +2,8 @@
 
 [DEMO](https://csv-to-graphql.herokuapp.com)
 
+![CSV to GraphQL demo](./DEMO.gif)
+
 ## Dev environment setup
 
 ### Setup Prerequisites
