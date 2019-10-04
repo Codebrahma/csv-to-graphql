@@ -231,7 +231,7 @@
                 class="upload"
               />
               <span class="filename"></span>
-              <input type="file" class="input" name="csv" />
+              <input type="file" class="input" accept="text/csv" name="csv" />
             </div>
           </div>
           <img
@@ -281,6 +281,9 @@
         .on('drop', function(e) {
           droppedFiles = e.originalEvent.dataTransfer.files;
           fileName = droppedFiles[0]['name'];
+          if (!fileName.toLowerCase().includes('.csv')) {
+            return $.notify('Only CSV files are allowed for input');
+          }
           $("[name=csv]").prop('files', droppedFiles);
           $('.filename').html(fileName);
           $('.dropzone .upload').hide();
